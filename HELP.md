@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'com.pascoe.weight-management' is invalid and this project uses 'com.pascoe.weightmanagement' instead.
+* The original package name 'com.pascoe.healthy-eater-api' is invalid and this project uses 'com.pascoe.weightmanagement' instead.
 
 # Getting Started
 
