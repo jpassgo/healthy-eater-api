@@ -1,12 +1,11 @@
 package com.pascoe.healthyeaterapi.model;
 
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class Meal {
 
-    private List<Food> meal;
-    private Integer caloricValue;
+  private List<Food> meal;
+  private Integer caloricValue;
 }
