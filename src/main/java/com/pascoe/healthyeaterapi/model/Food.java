@@ -1,7 +1,6 @@
 package com.pascoe.healthyeaterapi.model;
 
-public class FoodItem {
-
+public class Food {
     private String name;
     private Integer caloricValue;
 }

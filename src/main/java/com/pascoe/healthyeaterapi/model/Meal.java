@@ -7,6 +7,6 @@ import java.util.List;
 @Data
 public class Meal {
 
-    private List<FoodItem> meal;
+    private List<Food> meal;
     private Integer caloricValue;
 }
