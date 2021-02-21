@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("/")
 public class FoodConsumptionController {
 
-    @PostMapping
-    public void reportMeal() {
-
-    }
+  @PostMapping
+  public void reportMeal() {}
 }
