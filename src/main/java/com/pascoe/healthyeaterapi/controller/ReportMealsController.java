@@ -9,7 +9,5 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReportMealsController {
 
   @PostMapping
-  public void reportMeal(@RequestBody Meal meal) {
-
-  }
+  public void reportMeal(@RequestBody Meal meal) {}
 }

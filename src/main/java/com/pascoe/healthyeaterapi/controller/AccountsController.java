@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("/accounts")
 public class AccountsController {
 
-    @PostMapping
-    public void createAccount(@RequestBody LoginDetails userAccount) {
-
-    }
+  @PostMapping
+  public void createAccount(@RequestBody LoginDetails userAccount) {}
 }
