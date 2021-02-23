@@ -1,6 +1,6 @@
 package com.pascoe.healthyeaterapi.repository;
 
-import com.pascoe.healthyeaterapi.model.UserAccount;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.pascoe.healthyeaterapi.model.LoginDetails;
+import org.springframework.data.repository.CrudRepository;
 
-public interface UserAccountRepository extends MongoRepository<UserAccount, Long> {}
+public interface UserAccountRepository extends CrudRepository<LoginDetails, Integer> {}
