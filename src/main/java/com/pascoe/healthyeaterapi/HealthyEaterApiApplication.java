@@ -1,4 +1,4 @@
-package com.pascoe.weightmanagement;
+package com.pascoe.healthyeaterapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
