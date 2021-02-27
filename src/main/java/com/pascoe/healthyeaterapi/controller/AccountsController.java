@@ -8,14 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@Service
-@AllArgsConstructor
-@RestController("/accounts")
+@RestController
 public class AccountsController {
 
   private UserAccountRepository userAccountRepository;
 
-  @PostMapping
+  @PostMapping("/accounts")
   public void createAccount(@RequestBody UserAccount userAccount) {
      userAccountRepository.save(userAccount);
   }
