@@ -1,14 +1,15 @@
 package com.pascoe.healthyeaterapi.model;
 
-import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
-@NoArgsConstructor
+@AllArgsConstructor
 public class Meal {
 
   @Id
@@ -22,5 +23,5 @@ public class Meal {
   private List<Food> meal;
 
   private Integer caloricValue;
-  private Date date;
+  private LocalDate date;
 }
