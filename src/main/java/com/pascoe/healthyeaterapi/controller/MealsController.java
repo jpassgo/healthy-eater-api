@@ -2,7 +2,6 @@ package com.pascoe.healthyeaterapi.controller;
 
 import com.pascoe.healthyeaterapi.model.Meal;
 import com.pascoe.healthyeaterapi.service.MealsService;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +26,9 @@ public class MealsController {
 
   @GetMapping("/{id}")
   public ResponseEntity getMeals(@PathVariable Integer id) {
-    try {
-      List<Meal> meals = mealsService.getMeals(id);
-      return new ResponseEntity(meals, HttpStatus.OK);
-    } catch (IllegalArgumentException e) {
-      return new ResponseEntity(HttpStatus.BAD_REQUEST);
-    }
+    return mealsService
+            .getMeals(id)
+            .map(meals -> new ResponseEntity(meals, HttpStatus.OK))
+            .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
   }
 }
