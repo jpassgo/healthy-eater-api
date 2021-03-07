@@ -6,6 +6,8 @@ import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import static com.pascoe.healthyeaterapi.service.AccountValidator.isAccountValid;
+
 @Service
 @AllArgsConstructor
 public class AccountsService {
@@ -13,7 +15,11 @@ public class AccountsService {
   private UserAccountRepository userAccountRepository;
 
   public UserAccount createAccount(UserAccount userAccount) {
-    return userAccountRepository.save(userAccount);
+    if(isAccountValid(userAccount)) {
+      return userAccountRepository.save(userAccount);
+    } else {
+      throw new IllegalArgumentException();
+    }
   }
 
   public Optional<UserAccount> findAccount(Integer id) {
