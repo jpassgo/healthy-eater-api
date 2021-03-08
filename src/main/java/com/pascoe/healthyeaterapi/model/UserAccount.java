@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -22,8 +19,8 @@ public class UserAccount {
   private String firstName;
   private String lastName;
   //  Todo: Create Custom emailAddress class for email address validation
-  private String emailAddress;
   private LoginDetails loginDetails;
+  private String emailAddress;
 
   @Override
   public String toString() {
