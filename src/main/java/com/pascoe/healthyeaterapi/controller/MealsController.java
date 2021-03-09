@@ -27,8 +27,8 @@ public class MealsController {
   @GetMapping("/{id}")
   public ResponseEntity getMeals(@PathVariable Integer id) {
     return mealsService
-            .getMeals(id)
-            .map(meals -> new ResponseEntity(meals, HttpStatus.OK))
-            .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
+        .getMeals(id)
+        .map(meals -> new ResponseEntity(meals, HttpStatus.OK))
+        .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
   }
 }
