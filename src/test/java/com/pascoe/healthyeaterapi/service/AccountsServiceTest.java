@@ -14,6 +14,8 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -35,7 +37,7 @@ class AccountsServiceTest {
 
     @Test
     void createAccount() {
-        when(userAccountRepository.save(Mockito.any(UserAccount.class))).thenReturn(mockAccount);
+        when(userAccountRepository.save(any(UserAccount.class))).thenReturn(mockAccount);
 
         UserAccount account = accountsService.createAccount(mockAccount);
         assertThat(account).isNotNull();
@@ -52,7 +54,7 @@ class AccountsServiceTest {
     @Test
     void findAccount() {
         Optional<UserAccount> optionalMockAccount = Optional.of(mockAccount);
-        when(userAccountRepository.findById(Mockito.anyInt())).thenReturn(optionalMockAccount);
+        when(userAccountRepository.findById(anyInt())).thenReturn(optionalMockAccount);
 
         Optional<UserAccount> account = accountsService.findAccount(1);
         assertThat(account.isPresent()).isTrue();
