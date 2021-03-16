@@ -6,5 +6,10 @@ spring:
       name: admin
       password: root
 
+feign:
+  client:
+    edamam-api:
+      url: https://api.edamam.com/api/food-database/v2/parser
+
 server:
   port: 8080
