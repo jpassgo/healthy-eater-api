@@ -19,8 +19,11 @@ public class CalorieController {
 
     @GetMapping
     public ResponseEntity getCaloriesForFood(@RequestParam(value="food") String food) {
-         return ResponseEntity.of(Optional.of(edamamClient.getFoodDetails("ebd367b9", "8ab028daa0f4b8b8e6c4ddbf32c28757", food)
+         return ResponseEntity.of(Optional.of(edamamClient.getFoodDetails(
+                 "ebd367b9",
+                 "8ab028daa0f4b8b8e6c4ddbf32c28757", food)
                  .get("parsed")
+                 .get(0)
                  .get("food")
                  .get("nutrients")
                  .get("ENERC_KCAL")));
