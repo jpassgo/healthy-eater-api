@@ -11,5 +11,9 @@ feign:
     edamam-api:
       url: https://api.edamam.com/api/food-database/v2/parser
 
+app-id: ebd367b9
+app-key: 8ab028daa0f4b8b8e6c4ddbf32c28757
+
+
 server:
   port: 8080
