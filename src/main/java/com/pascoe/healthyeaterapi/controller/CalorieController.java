@@ -8,17 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @AllArgsConstructor
 @RequestMapping("/calories")
 public class CalorieController {
 
-    EdamamService edamamService;
+  EdamamService edamamService;
 
-
-    @GetMapping
-    public ResponseEntity getCaloriesForFood(@RequestParam(value="food") String food) {
-         return ResponseEntity.of(edamamService.getCalories(food));
-    }
+  @GetMapping
+  public ResponseEntity getCaloriesForFood(@RequestParam(value = "food") String food) {
+    return ResponseEntity.of(edamamService.getCalories(food));
+  }
 }
