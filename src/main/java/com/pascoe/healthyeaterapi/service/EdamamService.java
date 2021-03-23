@@ -3,15 +3,15 @@ package com.pascoe.healthyeaterapi.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.pascoe.healthyeaterapi.client.EdamamClient;
 import java.util.Optional;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EdamamService {
 
-  private EdamamClient edamamClient;
+  private final EdamamClient edamamClient;
 
   @Value("${app-id}")
   private String appId;

@@ -1,7 +1,6 @@
 package com.pascoe.healthyeaterapi.model;
 
 import java.time.LocalDate;
-import java.util.List;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,10 +18,6 @@ public class Meal {
   private Integer id;
 
   private Integer userId;
-
-  @ElementCollection(targetClass = Food.class)
-  @AttributeOverride(name = "name", column = @Column(name = "meal_meal"))
-  private List<Food> meal;
 
   private Integer caloricValue;
 
