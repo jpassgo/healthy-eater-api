@@ -1,11 +1,9 @@
 package com.pascoe.healthyeaterapi.model;
 
+import javax.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Embeddable;
-
 
 @Data
 @Embeddable
@@ -16,4 +14,3 @@ public class Food {
   private String name;
   private Integer caloricValue;
 }
-
