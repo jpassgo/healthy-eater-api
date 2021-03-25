@@ -2,6 +2,8 @@ package com.pascoe.healthyeaterapi.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.pascoe.healthyeaterapi.client.EdamamClient;
+
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,5 +30,10 @@ public class EdamamService {
             .get("food")
             .get("nutrients")
             .get("ENERC_KCAL"));
+  }
+
+  public Optional<List<JsonNode>> getSimilarFoodOptions(String food) {
+    return Optional.of(
+            edamamClient.getFoodDetails(appId, appKey, food).findValues("label"));
   }
 }
