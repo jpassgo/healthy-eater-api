@@ -20,9 +20,7 @@ public class Meal {
 
   private Integer userId;
 
-  @Embedded
-  @AttributeOverride(name = "name", column = @Column(name = "meal"))
-  private List<Food> meal;
+  @Embedded private List<Food> meal;
 
   private Integer caloricValue;
 
