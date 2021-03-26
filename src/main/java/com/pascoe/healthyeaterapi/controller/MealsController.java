@@ -1,6 +1,7 @@
 package com.pascoe.healthyeaterapi.controller;
 
 import com.pascoe.healthyeaterapi.model.Meal;
+import com.pascoe.healthyeaterapi.service.EdamamService;
 import com.pascoe.healthyeaterapi.service.MealsService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class MealsController {
 
   private MealsService mealsService;
+  private EdamamService edamamService;
 
   @PostMapping("/{id}")
   public ResponseEntity reportMeals(@PathVariable Integer id, @RequestBody Meal meal) {
@@ -30,5 +32,10 @@ public class MealsController {
         .getMeals(id)
         .map(meals -> new ResponseEntity(meals, HttpStatus.OK))
         .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
+  }
+
+  @GetMapping
+  public ResponseEntity getSimilarFoodOptions(@RequestParam(value = "food") String food) {
+    return ResponseEntity.of(edamamService.getSimilarFoodOptions(food));
   }
 }
