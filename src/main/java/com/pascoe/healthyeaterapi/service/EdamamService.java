@@ -2,7 +2,6 @@ package com.pascoe.healthyeaterapi.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.pascoe.healthyeaterapi.client.EdamamClient;
-
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +32,6 @@ public class EdamamService {
   }
 
   public Optional<List<JsonNode>> getSimilarFoodOptions(String food) {
-    return Optional.of(
-            edamamClient.getFoodDetails(appId, appKey, food).findValues("label"));
+    return Optional.of(edamamClient.getFoodDetails(appId, appKey, food).findValues("label"));
   }
 }
