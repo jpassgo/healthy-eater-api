@@ -6,6 +6,14 @@ spring:
       name: admin
       password: root
 
+jhipster:
+  security:
+    authentication:
+      jwt:
+        secret: 8ab028daa0f4b8b8e6c4ddbf32c287578ab028daa0f4b8b8e6c4ddbf32c28757
+        token-validity-in-seconds: 86400
+        token-validity-in-seconds-for-remember-me: 2592000
+
 feign:
   client:
     edamam-api:
