@@ -25,7 +25,7 @@ public class AuthTokenFilter implements Filter {
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
     HttpServletRequest httpRequest = (HttpServletRequest) request;
-    if (httpRequest.getServletPath().contains("authentication") || tokenProvider.validateToken(extractToken(httpRequest))) {
+    if (httpRequest.getServletPath().contains("/authentication") || tokenProvider.validateToken(extractToken(httpRequest))) {
       chain.doFilter(request, response);
     } else {
       HttpServletResponse httpResponse = (HttpServletResponse) response;
