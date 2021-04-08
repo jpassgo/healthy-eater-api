@@ -1,5 +1,6 @@
 package com.pascoe.healthyeaterapi.controller;
 
+import com.pascoe.healthyeaterapi.authentication.SimpleAuthenticationManager;
 import com.pascoe.healthyeaterapi.authentication.TokenProvider;
 import com.pascoe.healthyeaterapi.constants.HeadersUtils;
 import com.pascoe.healthyeaterapi.model.LoginDetails;
@@ -10,10 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,13 +20,13 @@ import static com.pascoe.healthyeaterapi.constants.HeadersUtils.BEARER;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/authenticate")
+@RequestMapping
 public class AuthenticationController {
 
     private final TokenProvider tokenProvider;
-    private final AuthenticationManager authenticationManager;
+    private final SimpleAuthenticationManager authenticationManager;
 
-    @PostMapping
+    @PostMapping("/authentication")
     public ResponseEntity authenticate(@RequestBody LoginDetails loginDetails, HttpServletResponse response) {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDetails.getUsername(), loginDetails.getPassword());
