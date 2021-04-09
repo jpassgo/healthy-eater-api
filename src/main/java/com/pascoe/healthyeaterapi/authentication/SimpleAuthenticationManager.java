@@ -23,6 +23,7 @@ public class SimpleAuthenticationManager implements AuthenticationManager {
   }
 
   public Authentication authenticate(Authentication auth) throws AuthenticationException {
+    // TODO: Need to actually validate the user here.
     if (auth.getName().equals(auth.getCredentials())) {
       return new UsernamePasswordAuthenticationToken(
           auth.getName(), auth.getCredentials(), AUTHORITIES);
