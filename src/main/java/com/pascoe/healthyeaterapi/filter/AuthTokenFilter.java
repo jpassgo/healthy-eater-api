@@ -10,7 +10,6 @@ import java.io.IOException;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import lombok.AllArgsConstructor;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -23,15 +22,14 @@ public class AuthTokenFilter implements Filter {
   TokenProvider tokenProvider;
 
   @Override
-  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+      throws IOException, ServletException {
     HttpServletRequest httpRequest = (HttpServletRequest) request;
-    if (httpRequest.getServletPath().contains("/authentication") || tokenProvider.validateToken(extractToken(httpRequest))) {
+    if (httpRequest.getServletPath().contains("/authentication")
+        || tokenProvider.validateToken(extractToken(httpRequest))) {
       chain.doFilter(request, response);
     } else {
-      HttpServletResponse httpResponse = (HttpServletResponse) response;
-      httpResponse.setStatus(401);
-
-      chain.doFilter(request, httpResponse);
+      ((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED, "The token is not valid.");
     }
   }
 
