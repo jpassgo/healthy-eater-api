@@ -31,19 +31,13 @@ class EdamamServiceTest {
 
     JsonNode node = mapper.readTree(jsonString);
 
-    //         .get("parsed")
-    //                .get(0)
-    //                .get("food")
-    //                .get("nutrients")
-    //                .get("ENERC_KCAL"))
-
     when(edamamClient
             .getFoodDetails(anyString(), anyString(), anyString())
-            .get("parsed")
+            .get(anyString())
             .get(0)
-            .get("food")
-            .get("nutrients")
-            .get("ENERC_KCAL"))
+            .get(anyString())
+            .get(anyString())
+            .get(anyString()))
         .thenReturn(node);
 
     Optional<JsonNode> calories = edamamService.getCalories("dog food");
