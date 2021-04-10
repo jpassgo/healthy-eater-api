@@ -3,6 +3,8 @@ package com.pascoe.healthyeaterapi.controller;
 import static com.pascoe.healthyeaterapi.constants.HeadersUtils.AUTHORIZATION_HEADER;
 import static com.pascoe.healthyeaterapi.constants.HeadersUtils.BEARER;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.pascoe.healthyeaterapi.authentication.AuthToken;
 import com.pascoe.healthyeaterapi.authentication.SimpleAuthenticationManager;
 import com.pascoe.healthyeaterapi.authentication.TokenProvider;
 import com.pascoe.healthyeaterapi.model.LoginDetails;
@@ -14,6 +16,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.spring.web.json.Json;
 
 @RestController
 @AllArgsConstructor
@@ -22,6 +25,7 @@ public class AuthenticationController {
 
   private final TokenProvider tokenProvider;
   private final SimpleAuthenticationManager authenticationManager;
+
 
   @PostMapping("/authentication")
   public ResponseEntity authenticate(
@@ -34,7 +38,6 @@ public class AuthenticationController {
     SecurityContextHolder.getContext().setAuthentication(authentication);
     String jwt = tokenProvider.createToken(authentication);
 
-    response.addHeader(AUTHORIZATION_HEADER, BEARER + jwt);
-    return new ResponseEntity(jwt, HttpStatus.OK);
+    return new ResponseEntity(new AuthToken(jwt), HttpStatus.OK);
   }
 }
