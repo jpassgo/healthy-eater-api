@@ -17,6 +17,7 @@ public class AccountsController {
   @PostMapping
   public ResponseEntity createAccount(@RequestBody UserAccount userAccount) {
     try {
+      userAccount.getUserCredentials().encryptPassword();
       UserAccount account = accountsService.createAccount(userAccount);
       return new ResponseEntity(account.getId(), HttpStatus.CREATED);
     } catch (IllegalArgumentException e) {
