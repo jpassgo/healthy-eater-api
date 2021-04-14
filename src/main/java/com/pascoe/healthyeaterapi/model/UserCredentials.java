@@ -1,19 +1,29 @@
 package com.pascoe.healthyeaterapi.model;
 
+import java.security.SecureRandom;
 import java.util.Collection;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import javax.persistence.Embeddable;
 
 @Data
+@Embeddable
 @NoArgsConstructor
-public class LoginDetails implements UserDetails {
+public class UserCredentials implements UserDetails {
 
   private String userName;
   private String password;
+  @JsonIgnore
   private Boolean locked;
-  private Boolean expired;
+  @JsonIgnore
+  private Boolean accountNonExpired;
+  @JsonIgnore
   private Boolean enabled;
 
   @Override
@@ -26,6 +36,12 @@ public class LoginDetails implements UserDetails {
     return password;
   }
 
+  public String encryptPassword() {
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10, new SecureRandom());
+
+    return this.password = encoder.encode(this.password);
+  }
+
   @Override
   public String getUsername() {
     return userName;
@@ -33,17 +49,17 @@ public class LoginDetails implements UserDetails {
 
   @Override
   public boolean isAccountNonExpired() {
-    return expired;
+    return true;
   }
 
   @Override
   public boolean isAccountNonLocked() {
-    return locked;
+    return true;
   }
 
   @Override
   public boolean isCredentialsNonExpired() {
-    return false;
+    return true;
   }
 
   @Override
