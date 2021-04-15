@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
 @Order(1)
@@ -27,17 +26,19 @@ public class AuthTokenFilter implements Filter {
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
       throws IOException, ServletException {
     HttpServletRequest httpRequest = (HttpServletRequest) request;
-    if (httpRequest.getServletPath().contains("/authentication") ||
-            isCreatingNewAccount(httpRequest) ||
-            tokenProvider.validateToken(extractToken(httpRequest))) {
+    if (httpRequest.getServletPath().contains("/authentication")
+        || isCreatingNewAccount(httpRequest)
+        || tokenProvider.validateToken(extractToken(httpRequest))) {
       chain.doFilter(request, response);
     } else {
-      ((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED, "The token is not valid.");
+      ((HttpServletResponse) response)
+          .sendError(HttpServletResponse.SC_UNAUTHORIZED, "The token is not valid.");
     }
   }
 
   private boolean isCreatingNewAccount(HttpServletRequest httpRequest) {
-    return httpRequest.getServletPath().contains("/accounts") && POST.matches(httpRequest.getMethod());
+    return httpRequest.getServletPath().contains("/accounts")
+        && POST.matches(httpRequest.getMethod());
   }
 
   private String extractToken(HttpServletRequest request) {

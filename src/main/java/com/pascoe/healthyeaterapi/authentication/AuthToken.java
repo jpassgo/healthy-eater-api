@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class AuthToken {
-    private final String authorization;
+  private final String authorization;
 }

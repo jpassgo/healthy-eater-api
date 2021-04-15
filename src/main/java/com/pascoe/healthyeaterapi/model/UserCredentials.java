@@ -1,16 +1,14 @@
 package com.pascoe.healthyeaterapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.security.SecureRandom;
 import java.util.Collection;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Embeddable;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import javax.persistence.Embeddable;
 
 @Data
 @Embeddable
@@ -19,12 +17,9 @@ public class UserCredentials implements UserDetails {
 
   private String userName;
   private String password;
-  @JsonIgnore
-  private Boolean locked;
-  @JsonIgnore
-  private Boolean accountNonExpired;
-  @JsonIgnore
-  private Boolean enabled;
+  @JsonIgnore private Boolean locked;
+  @JsonIgnore private Boolean accountNonExpired;
+  @JsonIgnore private Boolean enabled;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -14,10 +14,10 @@ public class UserAccount {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
+
   private String firstName;
   private String lastName;
-  @Embedded
-  private UserCredentials userCredentials;
+  @Embedded private UserCredentials userCredentials;
   //  Todo: Create Custom emailAddress class for email address validation
   private String emailAddress;
 
