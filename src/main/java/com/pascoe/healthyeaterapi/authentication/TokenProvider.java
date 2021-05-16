@@ -27,7 +27,6 @@ public class TokenProvider {
   private String secretKey;
   private Key key;
   private long tokenValidityInMilliseconds;
-  //    private long tokenValidityInMillisecondsForRememberMe;
   private final JHipsterProperties jHipsterProperties;
 
   public TokenProvider(JHipsterProperties jHipsterProperties) {
