@@ -1,7 +1,6 @@
 package com.pascoe.healthyeaterapi.controller;
 
 import com.pascoe.healthyeaterapi.model.Meal;
-import com.pascoe.healthyeaterapi.service.EdamamService;
 import com.pascoe.healthyeaterapi.service.MealsService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
