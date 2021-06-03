@@ -28,6 +28,7 @@ public class AuthTokenFilter implements Filter {
     HttpServletRequest httpRequest = (HttpServletRequest) request;
     if (httpRequest.getServletPath().contains("/authentication")
         || isCreatingNewAccount(httpRequest)
+        || isOptionsRequest(httpRequest)
         || tokenProvider.validateToken(extractToken(httpRequest))) {
       chain.doFilter(request, response);
     } else {
@@ -39,6 +40,10 @@ public class AuthTokenFilter implements Filter {
   private boolean isCreatingNewAccount(HttpServletRequest httpRequest) {
     return httpRequest.getServletPath().contains("/accounts")
         && POST.matches(httpRequest.getMethod());
+  }
+
+  private boolean isOptionsRequest(HttpServletRequest httpRequest) {
+    return OPTIONS.matches(httpRequest.getMethod());
   }
 
   private String extractToken(HttpServletRequest request) {
