@@ -1,7 +1,9 @@
 package com.pascoe.healthyeaterapi.controller;
 
+import com.pascoe.healthyeaterapi.authentication.AuthToken;
 import com.pascoe.healthyeaterapi.model.UserAccount;
 import com.pascoe.healthyeaterapi.service.AccountsService;
+import com.pascoe.healthyeaterapi.service.AuthenticationUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,13 +19,17 @@ import org.springframework.web.bind.annotation.*;
 public class AccountsController {
 
   private AccountsService accountsService;
+  private final AuthenticationUtils authenticationUtils;
 
   @PostMapping
   public ResponseEntity createAccount(@RequestBody UserAccount userAccount) {
     try {
       userAccount.getUserCredentials().encryptPassword();
       UserAccount account = accountsService.createAccount(userAccount);
-      return new ResponseEntity(account.getId(), HttpStatus.CREATED);
+
+      String jwt = authenticationUtils.generateAuthToken();
+
+      return new ResponseEntity(new AuthToken(jwt), HttpStatus.CREATED);
     } catch (IllegalArgumentException e) {
       return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
