@@ -8,6 +8,7 @@ import com.pascoe.healthyeaterapi.repository.UserAccountRepository;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 @AllArgsConstructor
@@ -29,5 +30,9 @@ public class AccountsService {
 
   public Optional<UserAccount> findAccount(UserCredentials userCredentials) {
     return userAccountRepository.findByUserCredentialsUserName(userCredentials.getUsername());
+  }
+
+  public boolean accountExists(UserAccount userAccount) {
+    return !findAccount(userAccount.getUserCredentials()).isPresent();
   }
 }
