@@ -2,6 +2,7 @@ package com.pascoe.healthyeaterapi.controller;
 
 import com.pascoe.healthyeaterapi.authentication.AuthToken;
 import com.pascoe.healthyeaterapi.model.UserAccount;
+import com.pascoe.healthyeaterapi.model.UserCredentials;
 import com.pascoe.healthyeaterapi.service.AccountsService;
 import com.pascoe.healthyeaterapi.service.AuthenticationUtils;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 
 
 @CrossOrigin
@@ -23,17 +25,23 @@ public class AccountsController {
 
   @PostMapping
   public ResponseEntity createAccount(@RequestBody UserAccount userAccount) {
+
     try {
       userAccount.getUserCredentials().encryptPassword();
-      UserAccount account = accountsService.createAccount(userAccount);
 
-      String jwt = authenticationUtils.generateAuthToken();
+      if(accountsService.accountExists(userAccount)) {
+        accountsService.createAccount(userAccount);
+        String jwt = authenticationUtils.generateAuthToken();
 
-      return new ResponseEntity(new AuthToken(jwt), HttpStatus.CREATED);
+        return new ResponseEntity(new AuthToken(jwt), HttpStatus.CREATED);
+      } else {
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+      }
     } catch (IllegalArgumentException e) {
       return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
   }
+
 
 
   @RequestMapping(method = RequestMethod.OPTIONS)
@@ -50,5 +58,17 @@ public class AccountsController {
         .findAccount(id)
         .map(userAccount -> new ResponseEntity(userAccount, HttpStatus.OK))
         .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
+  }
+
+  @GetMapping
+  public ResponseEntity retrieveAccountByCredentials(@RequestBody UserCredentials userCredentials) {
+    Optional<UserAccount> optionalUserAccount = accountsService.findAccount(userCredentials);
+
+    if (optionalUserAccount.isPresent() &&
+            authenticationUtils.doesPasswordMatch(userCredentials, optionalUserAccount)) {
+        return new ResponseEntity(optionalUserAccount.get(), HttpStatus.OK);
+    } else {
+      return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
   }
 }
