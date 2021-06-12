@@ -23,7 +23,7 @@ public class MealsController {
     return reportMeal(meal);
   }
 
-  @PostMapping("/{id}")
+  @PostMapping
   public ResponseEntity reportMeals(@RequestBody UserCredentials userCredentials, @RequestBody Meal meal) {
     meal.setId(accountsService.findAccount(userCredentials).get().getId());
     return reportMeal(meal);
@@ -34,7 +34,7 @@ public class MealsController {
     return retrieveMeals(id);
   }
 
-  @PostMapping("/{id}")
+  @PostMapping
   public ResponseEntity getMeals(@RequestBody UserCredentials userCredentials) {
     Integer id = accountsService.findAccount(userCredentials).get().getId();
     return retrieveMeals(id);
