@@ -8,7 +8,6 @@ import com.pascoe.healthyeaterapi.repository.UserAccountRepository;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 @AllArgsConstructor

@@ -5,22 +5,20 @@ import com.pascoe.healthyeaterapi.model.UserAccount;
 import com.pascoe.healthyeaterapi.model.UserCredentials;
 import com.pascoe.healthyeaterapi.service.AccountsService;
 import com.pascoe.healthyeaterapi.service.AuthenticationUtils;
-import lombok.AllArgsConstructor;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
-
 @CrossOrigin
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/accounts")
 public class AccountsController {
 
-  private AccountsService accountsService;
+  private final AccountsService accountsService;
   private final AuthenticationUtils authenticationUtils;
 
   @PostMapping
@@ -29,7 +27,7 @@ public class AccountsController {
     try {
       userAccount.getUserCredentials().encryptPassword();
 
-      if(accountsService.accountExists(userAccount)) {
+      if (accountsService.accountExists(userAccount)) {
         accountsService.createAccount(userAccount);
         String jwt = authenticationUtils.generateAuthToken();
 
@@ -41,8 +39,6 @@ public class AccountsController {
       return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
   }
-
-
 
   @RequestMapping(method = RequestMethod.OPTIONS)
   public ResponseEntity options() {
@@ -64,9 +60,9 @@ public class AccountsController {
   public ResponseEntity retrieveAccountByCredentials(@RequestBody UserCredentials userCredentials) {
     Optional<UserAccount> optionalUserAccount = accountsService.findAccount(userCredentials);
 
-    if (optionalUserAccount.isPresent() &&
-            authenticationUtils.doesPasswordMatch(userCredentials, optionalUserAccount)) {
-        return new ResponseEntity(optionalUserAccount.get(), HttpStatus.OK);
+    if (optionalUserAccount.isPresent()
+        && authenticationUtils.doesPasswordMatch(userCredentials, optionalUserAccount)) {
+      return new ResponseEntity(optionalUserAccount.get(), HttpStatus.OK);
     } else {
       return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }

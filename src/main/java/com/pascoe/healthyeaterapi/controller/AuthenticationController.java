@@ -4,11 +4,9 @@ import com.pascoe.healthyeaterapi.authentication.AuthToken;
 import com.pascoe.healthyeaterapi.model.UserAccount;
 import com.pascoe.healthyeaterapi.model.UserCredentials;
 import com.pascoe.healthyeaterapi.repository.UserAccountRepository;
-
+import com.pascoe.healthyeaterapi.service.AuthenticationUtils;
 import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
-
-import com.pascoe.healthyeaterapi.service.AuthenticationUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +36,4 @@ public class AuthenticationController {
 
     return new ResponseEntity(HttpStatus.UNAUTHORIZED);
   }
-
-
 }
