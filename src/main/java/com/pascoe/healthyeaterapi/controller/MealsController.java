@@ -1,7 +1,6 @@
 package com.pascoe.healthyeaterapi.controller;
 
 import com.pascoe.healthyeaterapi.model.Meal;
-import com.pascoe.healthyeaterapi.model.UserCredentials;
 import com.pascoe.healthyeaterapi.service.AccountsService;
 import com.pascoe.healthyeaterapi.service.MealsService;
 import lombok.AllArgsConstructor;
@@ -28,7 +27,6 @@ public class MealsController {
     return retrieveMeals(id);
   }
 
-
   private ResponseEntity reportMeal(@RequestBody Meal meal) {
     try {
       mealsService.reportMeal(meal);
@@ -40,8 +38,8 @@ public class MealsController {
 
   private ResponseEntity retrieveMeals(@PathVariable Integer id) {
     return mealsService
-            .getMeals(id)
-            .map(meals -> new ResponseEntity(meals, HttpStatus.OK))
-            .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
+        .getMeals(id)
+        .map(meals -> new ResponseEntity(meals, HttpStatus.OK))
+        .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
   }
 }
