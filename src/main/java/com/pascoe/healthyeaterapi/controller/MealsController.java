@@ -4,6 +4,7 @@ import com.pascoe.healthyeaterapi.model.Meal;
 import com.pascoe.healthyeaterapi.service.AccountsService;
 import com.pascoe.healthyeaterapi.service.MealsService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,14 @@ public class MealsController {
   @GetMapping("/{id}")
   public ResponseEntity getMeals(@PathVariable Integer id) {
     return retrieveMeals(id);
+  }
+
+  @RequestMapping(method = RequestMethod.OPTIONS)
+  public ResponseEntity options() {
+    HttpHeaders httpHeaders = new HttpHeaders();
+    httpHeaders.add("access-control-allow-origin", "*");
+
+    return new ResponseEntity(httpHeaders, HttpStatus.OK);
   }
 
   private ResponseEntity reportMeal(@RequestBody Meal meal) {
