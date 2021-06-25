@@ -23,6 +23,11 @@ public class MealsController {
     return reportMeal(meal);
   }
 
+  @PostMapping
+  public ResponseEntity reportMeals(@RequestBody Meal meal) {
+    return reportMeal(meal);
+  }
+
   @GetMapping("/{id}")
   public ResponseEntity getMeals(@PathVariable Integer id) {
     return retrieveMeals(id);
