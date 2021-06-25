@@ -8,6 +8,7 @@ import com.pascoe.healthyeaterapi.service.AuthenticationUtils;
 import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,5 +36,13 @@ public class AuthenticationController {
     }
 
     return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+  }
+
+  @RequestMapping(method = RequestMethod.OPTIONS)
+  public ResponseEntity options() {
+    HttpHeaders httpHeaders = new HttpHeaders();
+    httpHeaders.add("access-control-allow-origin", "*");
+
+    return new ResponseEntity(httpHeaders, HttpStatus.OK);
   }
 }
