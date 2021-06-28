@@ -37,7 +37,6 @@ public class AuthTokenFilter implements Filter {
     }
   }
 
-
   private boolean isCreatingNewAccount(HttpServletRequest httpRequest) {
     return httpRequest.getServletPath().contains("/accounts")
         && POST.matches(httpRequest.getMethod());
