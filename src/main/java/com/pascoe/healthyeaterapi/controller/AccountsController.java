@@ -57,6 +57,14 @@ public class AccountsController {
   }
 
   @GetMapping
+  public ResponseEntity retrieveAccount(@PathVariable String userName) {
+    return accountsService
+            .findAccount(userName)
+            .map(userAccount -> new ResponseEntity(userAccount, HttpStatus.OK))
+            .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
+  }
+
+  @GetMapping
   public ResponseEntity retrieveAccountByCredentials(@RequestBody UserCredentials userCredentials) {
     Optional<UserAccount> optionalUserAccount = accountsService.findAccount(userCredentials);
 
