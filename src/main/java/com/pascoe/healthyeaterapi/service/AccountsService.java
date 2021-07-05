@@ -31,6 +31,10 @@ public class AccountsService {
     return userAccountRepository.findByUserCredentialsUserName(userCredentials.getUsername());
   }
 
+  public Optional<UserAccount> findAccount(String userName) {
+    return userAccountRepository.findByUserCredentialsUserName(userName);
+  }
+
   public boolean accountExists(UserAccount userAccount) {
     return !findAccount(userAccount.getUserCredentials()).isPresent();
   }
