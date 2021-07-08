@@ -59,9 +59,9 @@ public class AccountsController {
   @GetMapping
   public ResponseEntity retrieveAccount(@PathVariable String userName) {
     return accountsService
-            .findAccount(userName)
-            .map(userAccount -> new ResponseEntity(userAccount, HttpStatus.OK))
-            .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
+        .findAccount(userName)
+        .map(userAccount -> new ResponseEntity(userAccount, HttpStatus.OK))
+        .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
   }
 
   @GetMapping
