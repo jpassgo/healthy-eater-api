@@ -63,16 +63,4 @@ public class AccountsController {
         .map(userAccount -> new ResponseEntity(userAccount, HttpStatus.OK))
         .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
   }
-
-  @GetMapping
-  public ResponseEntity retrieveAccountByCredentials(@RequestBody UserCredentials userCredentials) {
-    Optional<UserAccount> optionalUserAccount = accountsService.findAccount(userCredentials);
-
-    if (optionalUserAccount.isPresent()
-        && authenticationUtils.doesPasswordMatch(userCredentials, optionalUserAccount)) {
-      return new ResponseEntity(optionalUserAccount.get(), HttpStatus.OK);
-    } else {
-      return new ResponseEntity(HttpStatus.BAD_REQUEST);
-    }
-  }
 }
